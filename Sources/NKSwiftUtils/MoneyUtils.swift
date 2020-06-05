@@ -6,7 +6,7 @@
 //
 
 import Foundation
-final class MoneyUtils {
+public  class MoneyUtils {
 
     static var decimalSeparator: String {
         NumberFormatter().decimalSeparator

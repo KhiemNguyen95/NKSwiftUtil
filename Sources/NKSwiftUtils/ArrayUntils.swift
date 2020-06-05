@@ -6,7 +6,7 @@
 //
 
 import Foundation
-extension Array where Element: Equatable {
+public extension Array where Element: Equatable {
     public mutating func remove(_ element: Element) -> Element? {
         guard let idx = index(of: element) else {
             return nil
