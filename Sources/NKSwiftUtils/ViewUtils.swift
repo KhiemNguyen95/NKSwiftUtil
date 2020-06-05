@@ -7,12 +7,12 @@
 
 import UIKit
 public extension UIView {
-	func layout(using constraints: [NSLayoutConstraint]) {
+	public func layout(using constraints: [NSLayoutConstraint]) {
 		translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate(constraints)
 	}
 	/// addShadow and make boder
-	func addShadow(shadowColor: UIColor, offSet: CGSize, opacity: Float, shadowRadius: CGFloat, cornerRadius: CGFloat, corners: UIRectCorner = [], fillColor: UIColor = .white) {
+	public func addShadow(shadowColor: UIColor, offSet: CGSize, opacity: Float, shadowRadius: CGFloat, cornerRadius: CGFloat, corners: UIRectCorner = [], fillColor: UIColor = .white) {
 
 		let shadowLayer = CAShapeLayer()
 		let size = CGSize(width: cornerRadius, height: cornerRadius)
@@ -27,7 +27,7 @@ public extension UIView {
 		self.layer.addSublayer(shadowLayer)
 	}
 	/// make boder
-	func round(corners: UIRectCorner, cornerRadius: Double) {
+	public func round(corners: UIRectCorner, cornerRadius: Double) {
 		let size = CGSize(width: cornerRadius, height: cornerRadius)
 		let bezierPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: size)
 		let shapeLayer = CAShapeLayer()
@@ -36,13 +36,13 @@ public extension UIView {
 		self.layer.mask = shapeLayer
 	}
 
-	func circle() {
+	public func circle() {
 		layer.cornerRadius = min(bounds.width, bounds.height) / 2
 		layer.masksToBounds = true
 	}
-	// Using a function since `var image` might conflict with an existing variable
+	// Using a public function since `var image` might conflict with an existing variable
 	// (like on `UIImageView`)
-	func asImage() -> UIImage {
+	public func asImage() -> UIImage {
 		if #available(iOS 10.0, *) {
 			let renderer = UIGraphicsImageRenderer(bounds: bounds)
 			return renderer.image { rendererContext in
@@ -56,11 +56,11 @@ public extension UIView {
 			return UIImage(cgImage: image!.cgImage!)
 		}
 	}
-	func copyView<T: UIView>() -> T {
+	public func copyView<T: UIView>() -> T {
 		return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
 	}
 
-	func addBorders(to edges: UIRectEdge, withColor color: UIColor, heightOrWidth width: CGFloat) {
+	public func addBorders(to edges: UIRectEdge, withColor color: UIColor, heightOrWidth width: CGFloat) {
 
 		if edges.contains(.all) {
 			layer.borderColor = color.cgColor
@@ -102,7 +102,7 @@ public extension UIView {
 		 - Parameter target: context
 		 - Parameter action: Event của tap
 		 */
-	func addTapGesture(tapNumber: Int, target: Any, action: Selector) {
+	public func addTapGesture(tapNumber: Int, target: Any, action: Selector) {
 
 		let tapGesture = UITapGestureRecognizer(target: target, action: action)
 		tapGesture.numberOfTapsRequired = tapNumber
@@ -110,7 +110,7 @@ public extension UIView {
 		isUserInteractionEnabled = true
 	}
 
-	func dropShadow(color: UIColor = UIColor.lightGray, opacity: Float = 1, radius: CGFloat = 2, offset: CGSize = CGSize(width: 0, height: 2), scale: Bool = true) {
+	public func dropShadow(color: UIColor = UIColor.lightGray, opacity: Float = 1, radius: CGFloat = 2, offset: CGSize = CGSize(width: 0, height: 2), scale: Bool = true) {
 
 		layer.masksToBounds = false
 		layer.shadowColor = color.cgColor
@@ -122,11 +122,11 @@ public extension UIView {
 		layer.shouldRasterize = true
 		layer.rasterizationScale = scale ? UIScreen.main.scale : 1
 	}
-	class func fromNib<T : UIView>() -> T {
+	class public func fromNib<T : UIView>() -> T {
 		return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
 	}
 
-	func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+	public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
 		let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
 		let mask = CAShapeLayer()
 		mask.path = path.cgPath
