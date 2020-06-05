@@ -6,7 +6,7 @@
 //
 
 import UIKit
-public extension UIView {
+extension UIView {
 	public func layout(using constraints: [NSLayoutConstraint]) {
 		translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate(constraints)
@@ -126,12 +126,7 @@ public extension UIView {
 		return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
 	}
 
-	public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-		let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-		let mask = CAShapeLayer()
-		mask.path = path.cgPath
-		self.layer.mask = mask
-	}
+
 
 }
 //IBInspectable
@@ -218,5 +213,11 @@ extension UIView{
 			return layer.masksToBounds
 		}
 	}
+    public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
 
 }
