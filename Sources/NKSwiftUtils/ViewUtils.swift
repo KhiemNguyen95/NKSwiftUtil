@@ -130,7 +130,7 @@ extension UIView {
 
 }
 //IBInspectable
-extension UIView{
+public extension UIView{
 	// Set Corner Radius for UIView
 	@IBInspectable var cornerRadius: CGFloat {
 		set {
@@ -213,6 +213,11 @@ extension UIView{
 			return layer.masksToBounds
 		}
 	}
+    
+    /// d
+    /// - Parameters:
+    ///   - corners: d
+    ///   - radius: d
     public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()

@@ -27,7 +27,7 @@ public extension Date {
 	/// - Parameters:
 	///   - formatDate: format String input (default : "dd/MM/yyyy" )
 	///   - stringDate: data string
-    convenience init?(_ formatDate: String?, _ stringDate: String?, locale: Locale? = nil) {
+    init?(_ formatDate: String?, _ stringDate: String?, locale: Locale? = nil) {
         self.init()
         let dateFormatter: DateFormatter =  DateFormatter()
 
