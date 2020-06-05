@@ -6,7 +6,100 @@
 //
 
 import UIKit
-extension UIView {
+public extension UIView {
+    // Set Corner Radius for UIView
+    @IBInspectable var cornerRadius: CGFloat {
+        set {
+            self.layer.cornerRadius = newValue
+            self.clipsToBounds = newValue > 0
+        }
+        get {
+            return self.layer.cornerRadius
+        }
+    }
+    // Set Border Color for UIView
+    @IBInspectable var borderColor: UIColor? {
+        set {
+            self.layer.borderColor = newValue!.cgColor
+        }
+        get {
+            if let color = layer.borderColor {
+                return UIColor(cgColor: color)
+            } else {
+                return nil
+            }
+        }
+    }
+    // Set border width for UIView
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            self.layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
+
+    // Set Shadow Color for UIView
+    @IBInspectable var shadowColor: UIColor? {
+        set {
+            self.layer.shadowColor = newValue!.cgColor
+        }
+        get {
+            if let shadowColor = layer.shadowColor {
+                return UIColor(cgColor: shadowColor)
+            } else {
+                return nil
+            }
+        }
+    }
+    // Set Shadow Opacity
+    @IBInspectable var shadowOpacity: Float {
+        set {
+            self.layer.shadowOpacity = newValue
+        }
+        get {
+            return layer.shadowOpacity
+        }
+    }
+    // Set Shadow Radius for UIView
+    @IBInspectable var shadowRadius: CGFloat {
+        set {
+            self.layer.shadowRadius = newValue
+        }
+        get {
+            return layer.shadowRadius
+        }
+    }
+
+    // Set Shadow Offset for UIview
+    @IBInspectable var shadowOffset: CGSize {
+        set {
+            self.layer.shadowOffset = newValue
+        }
+        get {
+            return layer.shadowOffset
+        }
+    }
+    @IBInspectable var maskToBounds: Bool {
+        set {
+            self.layer.masksToBounds = newValue
+        }
+        get {
+            return layer.masksToBounds
+        }
+    }
+    
+    /// d
+    /// - Parameters:
+    ///   - corners: d
+    ///   - radius: d
+    public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
 	public func layout(using constraints: [NSLayoutConstraint]) {
 		translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate(constraints)
@@ -125,104 +218,4 @@ extension UIView {
 	class public func fromNib<T : UIView>() -> T {
 		return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
 	}
-
-
-
-}
-//IBInspectable
-public extension UIView{
-	// Set Corner Radius for UIView
-	@IBInspectable var cornerRadius: CGFloat {
-		set {
-			self.layer.cornerRadius = newValue
-			self.clipsToBounds = newValue > 0
-		}
-		get {
-			return self.layer.cornerRadius
-		}
-	}
-	// Set Border Color for UIView
-	@IBInspectable var borderColor: UIColor? {
-		set {
-			self.layer.borderColor = newValue!.cgColor
-		}
-		get {
-			if let color = layer.borderColor {
-				return UIColor(cgColor: color)
-			} else {
-				return nil
-			}
-		}
-	}
-	// Set border width for UIView
-	@IBInspectable var borderWidth: CGFloat {
-		set {
-			self.layer.borderWidth = newValue
-		}
-		get {
-			return layer.borderWidth
-		}
-	}
-
-	// Set Shadow Color for UIView
-	@IBInspectable var shadowColor: UIColor? {
-		set {
-			self.layer.shadowColor = newValue!.cgColor
-		}
-		get {
-			if let shadowColor = layer.shadowColor {
-				return UIColor(cgColor: shadowColor)
-			} else {
-				return nil
-			}
-		}
-	}
-	// Set Shadow Opacity
-	@IBInspectable var shadowOpacity: Float {
-		set {
-			self.layer.shadowOpacity = newValue
-		}
-		get {
-			return layer.shadowOpacity
-		}
-	}
-	// Set Shadow Radius for UIView
-	@IBInspectable var shadowRadius: CGFloat {
-		set {
-			self.layer.shadowRadius = newValue
-		}
-		get {
-			return layer.shadowRadius
-		}
-	}
-
-	// Set Shadow Offset for UIview
-	@IBInspectable var shadowOffset: CGSize {
-		set {
-			self.layer.shadowOffset = newValue
-		}
-		get {
-			return layer.shadowOffset
-		}
-	}
-	@IBInspectable var maskToBounds: Bool {
-		set {
-			self.layer.masksToBounds = newValue
-		}
-		get {
-			return layer.masksToBounds
-		}
-	}
-    
-    /// d
-    /// - Parameters:
-    ///   - corners: d
-    ///   - radius: d
-    public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-
 }
