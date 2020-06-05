@@ -6,7 +6,7 @@
 //
 
 import Foundation
-extension Date {
+public extension Date {
 	
 	/// convert Date to Sring
 	/// - Parameters:
@@ -27,7 +27,7 @@ extension Date {
 	/// - Parameters:
 	///   - formatDate: format String input (default : "dd/MM/yyyy" )
 	///   - stringDate: data string
-    init?(_ formatDate: String?, _ stringDate: String?, locale: Locale? = nil) {
+    convenience init?(_ formatDate: String?, _ stringDate: String?, locale: Locale? = nil) {
         self.init()
         let dateFormatter: DateFormatter =  DateFormatter()
 
@@ -45,6 +45,9 @@ extension Date {
         } else {
             return nil
         }
+    }
+    private func getDay () {
+        
     }
 }
 
